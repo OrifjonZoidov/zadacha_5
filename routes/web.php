@@ -32,5 +32,5 @@ Route::get('/create_orders',[BooksController::class,'create_orders'])->name('cre
 Route::get('/cart',[BooksController::class,'cart'])->name('cart');
 Route::get('/orders',[BooksController::class,'orders'])->name('orders');
 Route::get('/drop_cart/{id}',[BooksController::class,'drop_cart'])->name('drop_cart');
-
+Route::post('/store-cart', [BooksController::class, 'store_cart'])->name('store-cart');
 });

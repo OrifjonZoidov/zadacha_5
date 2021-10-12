@@ -101,12 +101,13 @@ class BooksController extends Controller
         return view('show',compact('book'));
     }
 
-    public function checkout()
+    public function store_cart(Request $request)
     {
-        $books=bookstore::all();
-        $data=Orders::all();
-        return view('checkout',compact('data','books'));
-
+        $cart = new Korzina();
+        $cart->user_id = $request->user_id;
+        $cart->book_id = $request->book_id;
+        $cart->save();
+        return redirect()->route('admin_index');
     }
 
     public function create_orders(Request $request)

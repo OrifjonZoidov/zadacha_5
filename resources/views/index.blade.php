@@ -3,38 +3,37 @@
 
     <table class="table" >
         <thead>
-        <tr>
+        <tr class="text-center">
             <th>№</th>
-            <th>Имя</th>
-            <th>Номер телефона</th>
-            <th>Действия</th>
+            <th>Имя</td>
+            <th>Автор</td>
+            <th>ISBN</td>
+            <th>Год выпуска</td>
+            <th></th>
         </tr>
         </thead>
 
         @php $i=0 @endphp
         @foreach($test  as $item)
             @php $i++ @endphp
-            <tr>
-                <th>{{$i}}</th>
-                <th>{{$item['title']}}</th>
-                <th>{{$item['author']}}</th>
-                <th>{{$item['ISBN']}}</th>
-                <th>{{$item['year_of_publication']}}</th>
-                <th>
-                    @if($item->user->contains('id',Auth::id()))
-                        <a href="{{route('drop_cart',['id'=>$item['id']])}}" class="btn btn-danger">Удалить из корзину</a>
-                    @else
-                        <form action="{{route('create_cart')}}" method="get">
+            <tr class="text-center">
+                <td>{{$i}}</th>
+                <td>{{$item['title']}}</th>
+                <td>{{$item['author']}}</th>
+                <td>{{$item['isbn']}}</th>
+                <td>{{$item['year_of_publication']}}</th>
+                <td>
+                    <form action="{{route('store-cart')}}" method="POST">
                             @csrf
-                            <input type="hidden"name="test" value="{{$item['id']}}">
+                            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                            <input type="hidden" name="book_id" value="{{$item['id']}}">
                             <button class="btn btn-success">Добавить в корзину</button>
                         </form>
-                    @endif
 
-                    @endforeach
-
-                </th>
+                </td>
             </tr>
+            @endforeach
+
     </table>
 {{--<section class="jumbotron text-center">--}}
     {{--<div class="container">--}}
